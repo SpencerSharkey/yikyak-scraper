@@ -6,8 +6,8 @@ program.option('-p --phone <phone_number>', 'Phone Number');
 program.option('-t --otp <otp>', 'One-Time-Passcode');
 program.option('-h --heartbeat <seconds>', 'Heartbeat Time (how often yaks are grabbed)', 10)
 
-program.option('-lat --latitude', 'Latitude');
-program.option('-lng --longitude', 'Longitude');
+program.option('-lat --latitude <lat>', 'Latitude');
+program.option('-lng --longitude <lng>', 'Longitude');
 
 program.parse(process.argv);
 
