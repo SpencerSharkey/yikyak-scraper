@@ -6,6 +6,9 @@ program.option('-p --phone <phone_number>', 'Phone Number');
 program.option('-t --otp <otp>', 'One-Time-Passcode');
 program.option('-h --heartbeat <seconds>', 'Heartbeat Time (how often yaks are grabbed)', 10)
 
+program.option('-lat --latitude', 'Latitude');
+program.option('-lng --longitude', 'Longitude');
+
 program.parse(process.argv);
 
 var inputPhone = program.phone;
@@ -24,8 +27,13 @@ var init = function(accessToken) {
 };
 
 var gatherYaks = function(accessToken) {
+
+    if (!program.latitude || !program.longitude) {
+        throw Error('did not pass a latitidue or longitude');
+    }
+
     request({
-        url: 'https://www.yikyak.com/api/proxy/v1/messages/all/new?userLat=39.4928235&userLong=-74.5596879&lat=39.4928235&long=-74.5596879&myHerd=0',
+        url: 'https://www.yikyak.com/api/proxy/v1/messages/all/new?userLat=' + program.latitude + '&userLong=' + program.longitude + '&lat=' + program.latitude + '&long=' + program.longitude + '&myHerd=0',
         method: 'GET',
         headers: {
             'x-access-token': accessToken,
